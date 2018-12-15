@@ -1,0 +1,73 @@
+<% include ../partials/header %>
+  <div class="section centered-v">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col s12 m8 offset-m2">
+          <div class="card blue lighten-1 z-depth-2">
+            <div class="card-content white-text">
+              <span class="card-title">Register for an account</span>
+              <p>Without an account you can't keep up with your pay! So sign up now...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <form action="/users/register" method="POST" class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="firstName" type="text" name="firstName" class="validate">
+              <label for="firstName">First Name</label>
+              <span class="helper-text" data-error="wrong" data-success="right">Required</span>
+            </div>
+            <div class="input-field col s6">
+              <input id="lastName" type="text" name="lastName" class="validate">
+              <label for="lastName">Last Name</label>
+              <span class="helper-text" data-error="wrong" data-success="right">Required</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="email" type="email" name="email" class="validate">
+              <label for="email">Email</label>
+              <span class="helper-text" data-error="wrong" data-success="right">Required</span>
+            </div>
+            <div class="input-field col s6">
+              <input id="password" type="password" name="password" class="validate">
+              <label for="password">Password</label>
+              <span class="helper-text" data-error="wrong" data-success="right">Required</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="username" type="text" name="username" class="validate">
+              <label for="username">Username</label>
+              <span class="helper-text" data-error="wrong" data-success="right">Required</span>
+            </div>
+            <div class="input-field col s6">
+              <select name="route" required>
+                <option value="" disabled selected>Choose your route</option>
+                <option value="1">Route 1</option>
+                <option value="2">Route 2</option>
+                <option value="3">Route 3</option>
+                <option value="4">Route 4</option>
+                <option value="5">Route 5</option>
+                <option value="6">Route 6</option>
+                <option value="7">Route 7</option>
+              </select>
+              <label>Materialize Select</label>
+              <span class="helper-text" data-error="wrong" data-success="right">Required</span>
+            </div>
+          </div>
+          <div class="row center">
+            <button type="submit" class="btn waves-effect waves-light blue z-depth-2">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="/javascripts/materialize.min.js"></script>
+  <script src="/javascripts/init.js"></script>
+  </body>
+</html> 

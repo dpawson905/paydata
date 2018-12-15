@@ -1,6 +1,6 @@
 <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo">Pay Tracker</a>
+      <a id="logo-container" href="/" class="brand-logo">Pay Tracker</a>
       <% if(!isAuthenticated) { %>
         <ul class="right hide-on-med-and-down">
           <li class="<%= typeof level !== 'undefined' && level === 'login' ? 'active' : '' %>"><a href="/users/login">Login</a></li>
@@ -14,21 +14,25 @@
       <% } else if(currentUser.isAdmin) { %>
         <ul class="right hide-on-med-and-down">
           <li class=""><a href="/users/admin">Welcome Admin</a></li>
+          <li class="<%= typeof level !== 'undefined' && level === 'index' ? 'active' : '' %>"><a href="/pay">View Pay Data</a></li>
           <li class=""><a href="/users/logout">Logout</a></li>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
           <li class=""><a href="/users/admin">Welcome Admin</a></li>
+          <li class="<%= typeof level !== 'undefined' && level === 'index' ? 'active' : '' %>"><a href="/pay">View Pay Data</a></li>
           <li class=""><a href="/users/logout">Logout</a></li>
         </ul>
       <% } else { %>
         <ul class="right hide-on-med-and-down">
           <li class=""><a href="/users/admin">Welcome <%= currentUser.username %></a></li>
+          <li class="<%= typeof level !== 'undefined' && level === 'index' ? 'active' : '' %>"><a href="/pay">View Pay Data</a></li>
           <li class=""><a href="/users/logout">Logout</a></li>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
           <li class=""><a href="/users/admin">Welcome <%= currentUser.username %></a></li>
+          <li class="<%= typeof level !== 'undefined' && level === 'index' ? 'active' : '' %>"><a href="/pay">View Pay Data</a></li>
           <li class=""><a href="/users/logout">Logout</a></li>
         </ul>
       <% } %>

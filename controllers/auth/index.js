@@ -7,6 +7,8 @@ const randomstring = require('randomstring');
 
 const User = require('../../models/user');
 
+const userImgID = randomstring.generate(8);
+
 module.exports = {
   getRegisterPage(req, res, next) {
     res.render('auth/register', {
@@ -43,7 +45,8 @@ module.exports = {
       username: req.body.username,
       route: req.body.route,
       isVerified: false,
-      token: randomstring.generate(64)
+      token: randomstring.generate(64),
+      image: `https://robohash.org/${userImgID}?set=set2`
     });
 
     /* Make first user admin */

@@ -14,3 +14,12 @@ header, main, footer {
   margin-right: auto;
   width: 100%;
 }
+
+.v1:nth-child(odd) {
+  border-right: 3px solid black;
+  height: 100%;
+}
+
+.mb1 {
+  margin-bottom: 2rem;
+}

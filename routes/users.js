@@ -12,11 +12,13 @@ const {
 } = require('../controllers/auth');
 
 const {
-  asyncErrorHandler
-} = require('../middleware')
+  asyncErrorHandler,
+  isAuthenticated,
+  isNotAuthenticated
+} = require('../middleware');
 
 /* GET register page */
-router.get('/register', getRegisterPage);
+router.get('/register', isAuthenticated, getRegisterPage);
 
 /* POST register page */
 router.post('/register', [
@@ -25,14 +27,14 @@ router.post('/register', [
     .normalizeEmail(),
   body('password')
     .trim()
-] ,asyncErrorHandler(postRegisterPage));
+], isAuthenticated ,asyncErrorHandler(postRegisterPage));
 
 /* GET validate user */
-router.get('/verify', asyncErrorHandler(getValidateUser));
+router.get('/verify', isAuthenticated, asyncErrorHandler(getValidateUser));
 
 
 /* GET login page */
-router.get('/login', getLoginPage);
+router.get('/login', isAuthenticated, getLoginPage);
 
 /* POST login page */
 router.post('/login', [
@@ -41,9 +43,9 @@ router.post('/login', [
     .normalizeEmail(),
   body('password')
     .trim()
-] ,asyncErrorHandler(postLoginPage));
+], isAuthenticated, asyncErrorHandler(postLoginPage));
 
 /* GET logout */
-router.get('/logout', getLogout);
+router.get('/logout', isNotAuthenticated, getLogout);
 
 module.exports = router;

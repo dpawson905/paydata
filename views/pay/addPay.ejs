@@ -1,0 +1,40 @@
+<% include ../partials/payHeader %>
+<main>
+    <div class="container">
+      <div class="row">
+        <h1 class="center">This is the add pay page</h1>
+        <p class="center">This is where all pay daya will be entered for a specific day</p>
+      </div>
+      <form action="/pay/add-pay" method="POST">
+        <div class="row">
+          <div class="input-field col s12 m6 offset-m3">
+            <input type="text" class="datepicker" name="date" id="date">
+            <label for="date">Date</label>
+          </div>
+        </div>
+        <div class="row pay">
+          <div class="input-field col s12 m6">
+            <input id="accountNumber" type="text" name="accountNumber" class="validate">
+            <label for="accountNumber">Account Number</label>
+            <span class="helper-text" data-error="wrong" data-success="Looks Good">Required</span>
+          </div>
+          <div class="input-field col s12 m6">
+            <input id="price" type="number" step="0.01" name="price" class="validate">
+            <label for="price">Price</label>
+            <span class="helper-text" data-error="wrong" data-success="Looks good!">Required</span>
+          </div>
+        </div>
+        <div id="newPay" class="row"></div>
+        <div class="row">
+          <div class="col s12 center">
+            <button type="submit" id="addNew" class="waves-effect waves-light btn">Add more</button>
+            <button type="submit" class="waves-effect waves-light btn">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script src="/javascripts/materialize.min.js"></script>
+  <script src="/javascripts/init.js"></script>
+  </body>
+</html> 

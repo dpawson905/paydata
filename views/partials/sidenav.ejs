@@ -1,15 +1,23 @@
-<ul id="slide-out" class="sidenav sidenav-fixed">
+<ul id="slide-out" class="sidenav sidenav-fixed blue lighten-1 z-depth-4">
   <li>
     <div class="user-view">
       <div class="background">
-        <img class="nav-img" src="images/web.jpg">
+        <img class="nav-img" src="/images/spider.jpg">
       </div>
-      <a href="#user"><img class="circle" src="<%= user.image %>"></a>
-      <a href="#name"><span class="white-text name"><%= user.username %></span></a>
+      <a href="#user"><img class="circle white" src="<%= user.image %>"></a>
+      <a href="#name"><span class="white-text name"><%= user.username %> <%= (!user.isAdmin) ? '' : '(Admin)'%></span></a>
       <a href="#email"><span class="white-text email"><%= user.email %></span></a>
     </div>
   </li>
-  <li><a href="#!">First Sidebar Link</a></li>
-  <li><a href="#!">Second Sidebar Link</a></li>
+  <li><a class="white-text" href="/"><i class="small material-icons white-text">home</i> Home</a></li>
+  <li class="<%= typeof level !== 'undefined' && level === 'mainPay' ? 'active' : '' %>">
+    <a class="white-text" href="/pay"><i class="small material-icons white-text">pageview</i> View Pay Data</a>
+  </li>
+  <li class="<%= typeof level !== 'undefined' && level === 'addPay' ? 'active' : '' %>">
+    <a class="white-text" href="/pay/add-pay"><i class="small material-icons white-text">add</i> Add New Pay</a>
+  </li>
+  <li class="<%= typeof level !== 'undefined' && level === 'editPay' ? 'active' : '' %>">
+    <a class="white-text" href="#!"><i class="small material-icons white-text">edit</i> Edit Pay</a>
+  </li>
 </ul>
 <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>

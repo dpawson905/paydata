@@ -1,2 +1,32 @@
-<% include ../partials/headerAdmin %>
-  
+<% include ../partials/payHeader %>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 mb1">
+          <div class="card blue lighten-1 z-depth-2">
+            <div class="card-content white-text">
+              <span class="card-title center">Here are your totals <%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) %></span>
+              <p class="center">Your totals for the week are $<%= totalPaid %></p>
+              <p class="center">Your 20% is $<%= Math.round(totalPaid * 0.20*Math.pow(10,2))/Math.pow(10,2).toFixed(2) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <% pay.forEach((payData) => { %>
+          <div class="col s12 m6 v1 mb1">
+            <p>Date: <span class="right"><%= payData.date %></span></p>
+            <p>Accounts Serviced: <span class="right"><%= payData.accountNumber.length %></span></p>
+            <p>Total: <span class="right">$<%= payData.total %></span></p>
+            <p>Average Price Per Job: <span class="right">
+              $<%= Math.round(payData.total / payData.accountNumber.length*Math.pow(10,2))/Math.pow(10,2).toFixed(2) %></span></p>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </main>
+  <script src="/javascripts/materialize.min.js"></script>
+  <script src="/javascripts/init.js"></script>
+  </body>
+</html> 

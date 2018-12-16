@@ -21,7 +21,7 @@ module.exports = {
       return next();
     } else {
       req.flash("error", "You must be logged in to view this page");
-      res.redirect("/");
+      res.redirect("/users/login");
     }
   },
 
@@ -31,6 +31,6 @@ module.exports = {
 			return next();
 		}
 		req.flash('error', 'You don\'t have the privileges to do that, now scram!');
-		res.redirect('/')
+		res.redirect("/users/login")
   }
 };

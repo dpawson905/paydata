@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
+    "app-root-path": "^2.1.0",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^2.0.6",
     "cookie-parser": "~1.4.3",
@@ -27,7 +28,8 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
-    "randomstring": "^1.1.5"
+    "randomstring": "^1.1.5",
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "dotenv": "^6.2.0"

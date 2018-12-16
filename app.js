@@ -8,12 +8,14 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const methodOverride = require('method-override');
 const helmet = require('helmet');
+
+const winston = require('./config/winston');
 
 const User = require('./models/user');
 
@@ -44,7 +46,7 @@ db.once('open', () => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+app.use(morgan('combined', { stream: winston.stream }));
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
@@ -90,9 +92,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', indexRouter);
 app.use('/pay', payRouter);
 app.use('/users', usersRouter);
+app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -101,6 +103,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
+  winston.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
   console.log(err.stack);
   req.flash('error', err.message);
   res.redirect('/');

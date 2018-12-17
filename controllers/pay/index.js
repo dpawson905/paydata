@@ -6,20 +6,32 @@ const User = require('../../models/user');
 module.exports = {
   async getMainPage(req, res, next) {
     const user = await User.findById(req.user.id);
-    const pay = await Pay.find({
-      'user.id': req.user.id
-    }).sort({date: 1})
-    let totals = 0;
-    pay.forEach(totalPay => {
-      totals += totalPay.total
-    });
-    let totalPaid = (Math.round(totals*Math.pow(10,2))/Math.pow(10,2).toFixed(2))
-    res.render('pay/index', {
-      level: 'mainPay',
-      user,
-      pay,
-      totalPaid
-    });
+    await Pay.find({
+      date: {
+        $gte: req.query.fromDate,
+        $lte: req.query.toDate
+      },
+      'user.id': {
+        $eq: req.user.id
+      }
+    }, (err, foundPay) => {
+      if(err) {
+        req.flash('error', err.message);
+        return res.redirect('back');
+      }
+
+      let totals = 0;
+      foundPay.forEach(totalPay => {
+        totals += totalPay.total
+      });
+      let totalPaid = (Math.round(totals*Math.pow(10,2))/Math.pow(10,2).toFixed(2))
+      res.render('pay/index', {
+        level: 'mainPay',
+        user,
+        foundPay,
+        totalPaid
+      });
+      }).sort({date: 1})
   },
 
   async getAddPay(req, res, next) {

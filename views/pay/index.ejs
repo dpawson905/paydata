@@ -2,7 +2,7 @@
   <main>
     <div class="container">
       <div class="row">
-        <div class="col s12 mb1">
+        <div class="col s12">
           <div class="card blue lighten-1 z-depth-2">
             <div class="card-content white-text">
               <span class="card-title center">Here are your totals <%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) %></span>
@@ -12,16 +12,37 @@
           </div>
         </div>
       </div>
-      
       <div class="row">
-        <% pay.forEach((payData) => { %>
-          <div class="col s12 m6 v1 mb1">
-            <p>Date: <span class="right"><%= payData.date %></span></p>
-            <p>Accounts Serviced: <span class="right"><%= payData.accountNumber.length %></span></p>
-            <p>Total: <span class="right">$<%= payData.total %></span></p>
-            <p>Average Price Per Job: <span class="right">
-              $<%= Math.round(payData.total / payData.accountNumber.length*Math.pow(10,2))/Math.pow(10,2).toFixed(2) %></span></p>
+        <h3 class="center">Select date range to view pay</h3>
+        <form action="/pay" method="GET">
+          <div class="input-field col s12 m5">
+            <input type="text" id="fromDate" name="fromDate" class="datepicker">
+            <label for="fromDate">Click to select from-date</label>
           </div>
+          <div class="input-field col s12 m5">
+            <input type="text" id="toDate" name="toDate" class="datepicker">
+            <label for="toDate">Click to select to-date</label>
+          </div>
+          <div class="col s12 m2 valign-wrapper">
+            <button type="submit" class="waves-effect waves-light btn-large">View Pay</button>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <% foundPay.forEach((payData) => { %>
+          <% if(payData.length < 1) { %>
+            <div class="col s12 m6 v1 mb1">
+              <h1 class="center">No data to display yet</h1>
+            </div>
+          <% } else { %>
+            <div class="col s12 m6 v1 mb1">
+              <p>Date: <span class="right"><%= payData.date %></span></p>
+              <p>Accounts Serviced: <span class="right"><%= payData.accountNumber.length %></span></p>
+              <p>Total: <span class="right">$<%= payData.total %></span></p>
+              <p>Average Price Per Job: <span class="right">
+                $<%= Math.round(payData.total / payData.accountNumber.length*Math.pow(10,2))/Math.pow(10,2).toFixed(2) %></span></p>
+            </div>
+          <% } %>
         <% }) %>
       </div>
     </div>

@@ -19,17 +19,20 @@ module.exports = {
         req.flash('error', err.message);
         return res.redirect('back');
       }
-
       let totals = 0;
       foundPay.forEach(totalPay => {
         totals += totalPay.total
       });
       let totalPaid = (Math.round(totals*Math.pow(10,2))/Math.pow(10,2).toFixed(2))
+      let fromDate = req.query.fromDate;
+      let toDate = req.query.toDate;
       res.render('pay/index', {
         level: 'mainPay',
         user,
         foundPay,
-        totalPaid
+        totalPaid,
+        fromDate,
+        toDate
       });
       }).sort({date: 1})
   },

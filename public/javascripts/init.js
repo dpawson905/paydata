@@ -1,9 +1,11 @@
 (function($){
   $(function(){
-
+    let options = {
+      autoClose: true
+    }
     $('.sidenav').sidenav();
     $('select').formSelect();
-    $('.datepicker').datepicker();
+    $('.datepicker').datepicker(options);
 
     let wrapper = $('#newPay');
     $('#addNew').click(function (e) {

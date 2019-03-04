@@ -106,11 +106,16 @@ module.exports = {
   },
 
   async postLoginPage(req, res, next) {
-    const isUserValid = await User.findOne({
-      'username': req.body.username
+    const user = await User.findOne({
+      username: req.body.username
     });
 
-    if(!isUserValid.isVerified) {
+    if(!user) {
+      req.flash('error', 'Username or password is incorrect.');
+      return res.redirect('/users/login');
+    }
+
+    if(!user.isVerified) {
       req.flash('error', 'Account is not validated. Please check your email.');
       res.redirect('/users/login');
       return;

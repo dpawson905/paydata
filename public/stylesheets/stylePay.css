@@ -23,3 +23,7 @@ header, main, footer {
 .mb1 {
   margin-bottom: 2rem;
 }
+
+.mb-small {
+  margin-bottom: .75rem;
+}

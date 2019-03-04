@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const mongoosePaginate = require('mongoose-paginate');
 
 const PaySchema = new Schema({
   date: {
-    type: String,
+    type: Date,
     required: [true, 'Date is required']
   },
   accountNumber: {
@@ -32,4 +33,5 @@ const PaySchema = new Schema({
 //   await this.save();
 // })
 
+PaySchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('Pay', PaySchema);

@@ -56,6 +56,7 @@ app.locals.moment = require('moment');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(helmet());
+app.locals.moment = require('moment');
 
 var sess = {
   secret: process.env.COOKIE_SECRET,

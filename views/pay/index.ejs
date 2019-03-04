@@ -5,10 +5,12 @@
         <div class="col s12">
           <div class="card blue lighten-1 z-depth-2">
             <div class="card-content white-text">
-              <span class="card-title center">Here are your totals <%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) %></span>
-              <p class="center">Your totals for the week are $<%= totalPaid %></p>
+              <span class="card-title center">Hi <%= user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) %></span>
+              <p class="center">Your totals for <%= fromDate %> - <%= toDate %> are $<%= totalPaid %></p>
               <p class="center">Your 20% is $<%= Math.round(totalPaid * 0.20*Math.pow(10,2))/Math.pow(10,2).toFixed(2) %></p>
+              <p class="center">Based on an 80 hour pay period you are averageing $<%=  Math.round(((totalPaid * 0.20) /80)*Math.pow(10,2))/Math.pow(10,2).toFixed(2) %>/hr</p>
               <p class="center">These are estimations and are before taxes and deductions.</p>
+
             </div>
           </div>
         </div>
@@ -30,19 +32,29 @@
         </form>
       </div>
       <div class="row">
-        <% if(foundPay.length < 1) { %>
+        <% if(pay.docs.length < 1) { %>
           <div class="col s12">
             <h4 class="center">No data to display yet</h4>
             <p class="center">Select date ranges to view pay.</p>
           </div>
         <% } %>
-        <% foundPay.forEach((payData) => { %>
-          <div class="col s12 m6 v1 mb1 hoverable">
-            <p>Date: <span class="right"><%= payData.date %></span></p>
+        <% pay.docs.forEach((payData) => { %>
+          <div class="col s12 m6 v1 mb1">
+            <p>Date: <span class="right"><%= moment(payData.date).format('dddd, MMMM Do YYYY') %></span></p>
             <p>Accounts Serviced: <span class="right"><%= payData.accountNumber.length %></span></p>
             <p>Total: <span class="right">$<%= payData.total %></span></p>
             <p>Average Price Per Job: <span class="right">
               $<%= Math.round(payData.total / payData.accountNumber.length*Math.pow(10,2))/Math.pow(10,2).toFixed(2) %></span></p>
+              <div class="row center mb-1">
+                <div class="col s8">
+                  <a href="/pay/<%= payData.id %>/edit" class="waves-effect waves-light btn-small">Add more pay for <%= moment(payData.date).format('dddd, MMMM Do YYYY') %></a>
+                </div>
+                <div class="col s4">
+                  <form action="/pay/<%= payData.id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="waves-effect waves-light btn-small">Delete</button>
+                  </form>
+                </div>
+              </div>
           </div>
         <% }) %>
       </div>

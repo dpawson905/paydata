@@ -110,4 +110,8 @@ app.use(function (err, req, res, next) {
   res.redirect('/');
 });
 
-module.exports = app;
+const port = process.env.PORT || 3000;
+
+app.listen(port, process.env.IP, function() {
+  debug("Customers!");
+});

@@ -1,4 +1,4 @@
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 
 const debug = require('debug')('paydata:main');
 const createError = require('http-errors');

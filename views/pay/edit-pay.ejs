@@ -14,12 +14,12 @@
         </div>
       </div>
       <div class="row">
-        <h4 class="center">Add more pay to the work day of <%= foundItem.date %></h4>
+        <h4 class="center">Add more pay to the work day of <%= moment(foundItem.date).format('dddd, MMMM Do YYYY') %></h4>
       </div>
       <form action="/pay/<%= foundItem.id %>?_method=PUT" method="POST">
         <div class="row">
           <div class="input-field col s12 m6 offset-m3">
-            <input type="text" class="datepicker" name="date" id="date"value="<%= foundItem.date %>">
+            <input type="text" class="datepicker" name="date" id="date"value="<%= moment(foundItem.date).format('MMM DD, YYYY') %>">
             <label for="date">Date</label>
           </div>
         </div>

@@ -83,14 +83,16 @@ module.exports = {
       res.redirect('back');
       return;
     }
-    console.log(req.body.accountNumber)
     editPay.date = req.body.date;
-    for(let i = 0; i < req.body.accountNumber.length; i++) {
-      editPay.accountNumber.push(req.body.accountNumber[i]);
-    }
-    for(let i = 0; i < req.body.price.length; i++) {
-      editPay.price.push(parseFloat(req.body.price[i]));
-    }
+  
+    let accountNumber = editPay.accountNumber;
+    let price = editPay.price;
+    let newAccArray = await accountNumber.concat(req.body.accountNumber);
+    let newPriceArray = await price.concat(req.body.price);
+
+    editPay.accountNumber = newAccArray;
+    editPay.price = newPriceArray
+
     let totals = 0;
     editPay.price.forEach(totalPrice => {
       totals += totalPrice

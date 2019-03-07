@@ -16,7 +16,10 @@ module.exports = {
       }
     }, {
       page: req.query.page || 1,
-      limit: 25
+      limit: 25,
+      sort: {
+        date: 1
+      }
     });
     let totals = 0;
     pay.docs.forEach(totalPay => {
